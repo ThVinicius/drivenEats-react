@@ -27,10 +27,36 @@ export default function Footer() {
     return status
   }
 
+  const toSend = () => {
+    if (user.button === false) return
+    // const message = window.encodeURIComponent(
+    //   `Olá, gostaria de fazer o pedido:\n- Prato: ${prato}\n- Bebida: ${bebida}\n- Sobremesa: ${sobremesa}\nTotal: R$ ${(
+    //     precoPrato +
+    //     precoBebida +
+    //     precoSobremesa
+    //   )
+    //     .toFixed(2)
+    //     .toString()
+    //     .replace('.', ',')}\n\nNome: ${nome}\nEndereço: ${endereco}`
+    // )
+    console.log(
+      `Olá, gostaria de fazer o pedido:\n- Prato: ${prato}\n- Bebida: ${bebida}\n- Sobremesa: ${sobremesa}\nTotal: R$ ${(
+        precoPrato +
+        precoBebida +
+        precoSobremesa
+      )
+        .toFixed(2)
+        .toString()
+        .replace('.', ',')}\n\nNome: ${nome}\nEndereço: ${endereco}`
+    )
+  }
+
   return (
     <Container>
       <Content>
-        <Button state={state()}>{button()}</Button>
+        <Button state={state()} onClick={toSend}>
+          {button()}
+        </Button>
         {/* <div className="enviar escondido">
             <button onclick="confirmarPedido()">Fechar pedido</button>
           </div> */}

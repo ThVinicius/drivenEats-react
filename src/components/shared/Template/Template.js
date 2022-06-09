@@ -4,13 +4,48 @@ import { Container, Amount } from './style'
 
 const verify = (user, setUser) => {
   if (
-    user.mainCourse === null ||
-    user.drink === null ||
-    user.dessert === null
+    user.mainCourse.length === 0 ||
+    user.drink.length === 0 ||
+    user.dessert.length === 0
   ) {
     return
   }
   setUser({ ...user, button: true })
+}
+
+const incrementAndDecrement = (array, name, num) => {
+  array.find((item, index, arr) => {
+    if (item.name === name) {
+      arr[index].qtd += num
+
+      if (num === -1 && item.qtd === 0) {
+        array.splice(index, 1)
+      }
+    }
+    return item.name === name
+  })
+}
+
+const unity = (type, user, name, num) => {
+  switch (true) {
+    case type === 'mainCourse':
+      incrementAndDecrement(user.mainCourse, name, num)
+
+      break
+
+    case type === 'drink':
+      incrementAndDecrement(user.drink, name, num)
+
+      break
+
+    case type === 'dessert':
+      incrementAndDecrement(user.dessert, name, num)
+
+      break
+
+    default:
+      break
+  }
 }
 
 export default function Template({ image, name, description, price, type }) {
@@ -19,9 +54,11 @@ export default function Template({ image, name, description, price, type }) {
 
   const amount = math => {
     if (math === 'plus') {
+      unity(type, user, name, 1)
       setCount(count + 1)
     }
     if (math === 'minus') {
+      unity(type, user, name, -1)
       setCount(count - 1)
       if (count === 1) {
         setUser({ ...user, button: false })
@@ -50,15 +87,18 @@ export default function Template({ image, name, description, price, type }) {
 
     switch (true) {
       case type === 'mainCourse':
-        user.mainCourse = [{ name: name, price: price, qtd: 1 }]
+        user.mainCourse = [
+          ...user.mainCourse,
+          { name: name, price: price, qtd: 1 }
+        ]
         break
 
       case type === 'drink':
-        user.drink = [{ name: name, price: price, qtd: 1 }]
+        user.drink = [...user.drink, { name: name, price: price, qtd: 1 }]
         break
 
       case type === 'dessert':
-        user.dessert = [{ name: name, price: price, qtd: 1 }]
+        user.dessert = [...user.dessert, { name: name, price: price, qtd: 1 }]
         break
 
       default:

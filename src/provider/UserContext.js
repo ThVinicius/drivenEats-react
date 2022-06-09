@@ -4,9 +4,9 @@ export const UserContext = createContext()
 
 export function AuthProvider(props) {
   const [user, setUser] = useState({
-    mainCourse: null,
-    drink: null,
-    dessert: null,
+    mainCourse: [],
+    drink: [],
+    dessert: [],
     button: false
   })
   return (
