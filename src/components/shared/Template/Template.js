@@ -108,7 +108,6 @@ export default function Template({ image, name, description, price, type }) {
     verify(user, setUser)
     return setCount(1)
   }
-  console.log(user)
   return (
     <Container border={selected()} onClick={() => disableClick()}>
       <div>
