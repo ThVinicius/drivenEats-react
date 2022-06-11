@@ -84,7 +84,10 @@ export default function Footer() {
         .toString()
         .replace('.', ',')}`
     )
-    window.open(`https://wa.me/+5518999999999?text=${message}`)
+    const fone = prompt(
+      'Digite seu Whatsapp com o DDD\n(Para simular o whatsapp do restaurante)'
+    )
+    window.open(`https://wa.me/+55${fone}?text=${message}`)
   }
 
   return (
